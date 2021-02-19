@@ -36,7 +36,7 @@ The Stack itself consists of at least two segments:
   * The Global Segment which contains global data used by the program, and
 
   * Any number of frames, where a frame is an activation of a procedure or function (and so it contains all the data local to the activation itself). Calling a routine causes
-    a new frame to be pushed on top, and returning from a routine causes the topmost frame to be poppd off, possibly leaving behind the results of activation on the top of the
+    a new frame to be pushed on top, and returning from a routine causes the topmost frame to be popped off, possibly leaving behind the results of activation on the top of the
     stack. 
 
     Register LB points to the base of the topmost frame. The topmost frame may expand or shrink, but the lower frames are temporarily fixed in size. Basically, the currently active
@@ -83,7 +83,7 @@ Global, local, and nonlocal data can be accessed as follows:
 In general:
 
 ```
-  d[SB] for any routines to access global data
+  d[SB] for any routine to access global data
   
   d[LB] for any routine to access its own local data
 
@@ -103,6 +103,10 @@ A frame represents an activation of a routine. A typical stack frame consists of
 
   * The return address of the instruction immediately following the call instruction that activated this routine.
 
+  * Local data.
+
+The first three components listed above are referred to as the "link data".
+
 There are 16 registers in the TAM architecture, each with its dedicated purpose:
 
 Register   Mnemonic     Name                         Behaviour
@@ -121,9 +125,10 @@ Register   Mnemonic     Name                         Behaviour
   11         L3        Local Base 3        L3 = content(content(content(LB)))
   12         L4        Local Base 4        L3 = content(content(content(content(LB))))
   13         L5        Local Base 5        L3 = content(content(content(content(content(LB)))))
-  14         L5        Local Base 6        L3 = content(content(content(content(content(content(LB))))))
+  14         L6        Local Base 6        L3 = content(content(content(content(content(content(LB))))))
   15         CP        Code Pointer        changed by all instructions
 
+Thus the TAM allows for at most 6 levels of nesting.
 
 ## Instructions
 
@@ -138,9 +143,8 @@ TAM instructions have a fixed 32-bit format:
 
 Every TAM routine follows this basic protocol:
 
-Suppose a procedure P requires d words of arguments and returns n words as result. The before the call to P, d words of arguments must be pushed onto the top of the stack. Just
-after returning from P, n words of resul words myst be pushed onto the top of the stack (the d words of arguments having already been popped off). Note that both d and n may be 9.
-
+Suppose a procedure P requires d words of arguments and returns n words as result. Then, before the call to P, d words of arguments must be pushed onto the top of the stack. Just
+after returning from P, n words of result words must be pushed onto the top of the stack (the d words of arguments having already been popped off). Note that both d and n may be 9.
 
 There are two kinds of routines in TAM:
 
@@ -150,7 +154,7 @@ There are two kinds of routines in TAM:
 A code routine consists of instructions stored in the code segment. Control is transferred to the first instruction of the routine via a CALL or CALLI instruction. Control is 
 then transferred back via a RETURN instruction. 
 
-Consider the lifecycle of call of a typical procedure R:
+Consider the lifecycle of a typical procedure call of a procedure R:
 
   1. Immediately before the call, R's arguments (if any) must be at the stack top.
 
@@ -164,18 +168,19 @@ Consider the lifecycle of call of a typical procedure R:
   4. The instruction RETURN(n) d pops the topmost frame, and replaces the d arguments at the current stack top with the n results of the routine call. LB is reset using the dynamic
      link of the popped frame, and control is transferred to the return address of the popped frame.
 
-R access its arguments using negative displacements:
+R accesses its arguments using negative displacements:
 
 ```
   LOAD(1) -d[LB] to access the first argument
 
-  LOAD(1) -1[LB to access the dth argument]
+  LOAD(1) -1[LB] to access the dth argument
 ```
 
-A primitive routine is one that performs elementary arithmetic, logical, output, heap, or general-purpose operations. Each primitive routine has a fixed address in the Primitive
-Segment of the Code Store. TAM traps every call to a primitive routine and performs the corresponding operation directly.
+A primitive routine is one that performs elementary arithmetic, logical, input-output, heap, or general-purpose operations. Each primitive routine has a fixed address in the Primitive Segment of the Code Store. TAM traps every call to a primitive routine and performs the corresponding operation directly.
 
 ### Summary of TAM instructions
+
+Note that loads and stores are always wih respect to memory. Load from memory, and store to memory.
 
 ```
   Opcode   Mnemonic                                             Effect
@@ -192,11 +197,11 @@ Segment of the Code Store. TAM traps every call to a primitive routine and perfo
 
     5      STOREI(n)         Pop an address from the stack, then pop an n-word object from the stack, and store it at that address.
 
-    6      CALL(n) d[r]      Call the routine at code address (d + register r) using the addres in register n as the static link.
+    6      CALL(n) d[r]      Call the routine at code address (d + register r) using the address in register n as the static link.
 
     7      CALLI             Pop a closure (static link + code address) from the stack, and then call the routine at that address.
 
-    8      RETURN(n) d       Return from the current routine - pop and n-word result from the stack, then pop the topmost frame, then pop d-words of arguments, and then
+    8      RETURN(n) d       Return from the current routine - pop an n-word result from the stack, then pop the topmost frame, then pop d-words of arguments, and then
                              finally push the result back onto the stack.
 
     9      -----             Unused
@@ -248,5 +253,3 @@ Segment of the Code Store. TAM traps every call to a primitive routine and perfo
     PB + 27         new                  n             a'         Set a' = starting address of the newly allocated n-word object on the heap
     PB + 28         dispose              n, a          -          Deallocate the n-word object at address a on the heap
 ```
-
-
