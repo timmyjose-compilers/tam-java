@@ -1,0 +1,39 @@
+0:  JUMP        28[CB]
+1:  LOAD  (1)   -5[LB]
+2:  CALL        put     
+3:  CALL        puteol  
+4:  LOAD  (1)   -4[LB]
+5:  LOADL       1
+6:  LOADL       1
+7:  CALL        eq      
+8:  JUMPIF(0)   12[CB]
+9:  LOADL       121
+10:  CALL        put     
+11:  JUMP        14[CB]
+12:  LOADL       110
+13:  CALL        put     
+14:  CALL        puteol  
+15:  LOAD  (1)   -3[LB]
+16:  CALL        putint  
+17:  LOADL       32
+18:  CALL        put     
+19:  LOAD  (1)   -2[LB]
+20:  CALL        putint  
+21:  LOADL       32
+22:  CALL        put     
+23:  LOAD  (1)   -1[LB]
+24:  CALL        putint  
+25:  LOADL       32
+26:  CALL        put     
+27:  RETURN(0)   5
+28:  PUSH        5
+29:  LOADL       66
+30:  LOADL       0
+31:  LOADL       1970
+32:  LOADL       12
+33:  LOADL       22
+34:  STORE (5)   0[SB]
+35:  LOAD  (5)   0[SB]
+36:  CALL  (SB)  1[CB]
+37:  POP   (0)   5
+38:  HALT  

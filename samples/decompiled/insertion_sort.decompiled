@@ -1,0 +1,137 @@
+0:  PUSH        10
+1:  JUMP        25[CB]
+2:  LOAD  (1)   -2[LB]
+3:  LOAD  (1)   -1[LB]
+4:  LOADL       1
+5:  CALL        sub     
+6:  LOADL       1
+7:  CALL        eq      
+8:  JUMPIF(0)   14[CB]
+9:  LOAD  (1)   -2[LB]
+10:  LOAD  (1)   -3[LB]
+11:  CALL        add     
+12:  CALL        getint  
+13:  JUMP        24[CB]
+14:  LOAD  (1)   -2[LB]
+15:  LOAD  (1)   -3[LB]
+16:  CALL        add     
+17:  CALL        getint  
+18:  LOAD  (1)   -3[LB]
+19:  LOAD  (1)   -2[LB]
+20:  LOADL       1
+21:  CALL        add     
+22:  LOAD  (1)   -1[LB]
+23:  CALL  (SB)  2[CB]
+24:  RETURN(0)   3
+25:  JUMP        31[CB]
+26:  LOAD  (1)   -1[LB]
+27:  LOADL       0
+28:  LOADL       10
+29:  CALL  (SB)  2[CB]
+30:  RETURN(0)   1
+31:  JUMP        58[CB]
+32:  LOAD  (1)   -2[LB]
+33:  LOAD  (1)   -1[LB]
+34:  LOADL       1
+35:  CALL        sub     
+36:  LOADL       1
+37:  CALL        eq      
+38:  JUMPIF(0)   45[CB]
+39:  LOAD  (1)   -2[LB]
+40:  LOADA       -12[LB]
+41:  CALL        add     
+42:  LOADI (1)   
+43:  CALL        putint  
+44:  JUMP        57[CB]
+45:  LOAD  (1)   -2[LB]
+46:  LOADA       -12[LB]
+47:  CALL        add     
+48:  LOADI (1)   
+49:  CALL        putint  
+50:  CALL        puteol  
+51:  LOAD  (10)  -12[LB]
+52:  LOAD  (1)   -2[LB]
+53:  LOADL       1
+54:  CALL        add     
+55:  LOAD  (1)   -1[LB]
+56:  CALL  (SB)  32[CB]
+57:  RETURN(0)   12
+58:  JUMP        64[CB]
+59:  LOAD  (10)  -10[LB]
+60:  LOADL       0
+61:  LOADL       10
+62:  CALL  (SB)  32[CB]
+63:  RETURN(0)   10
+64:  JUMP        123[CB]
+65:  PUSH        1
+66:  PUSH        1
+67:  PUSH        1
+68:  LOADL       1
+69:  STORE (1)   3[LB]
+70:  JUMP        117[CB]
+71:  LOAD  (1)   3[LB]
+72:  LOAD  (1)   -1[LB]
+73:  CALL        add     
+74:  LOADI (1)   
+75:  STORE (1)   4[LB]
+76:  LOAD  (1)   3[LB]
+77:  LOADL       1
+78:  CALL        sub     
+79:  STORE (1)   5[LB]
+80:  JUMP        95[CB]
+81:  LOAD  (1)   5[LB]
+82:  LOAD  (1)   -1[LB]
+83:  CALL        add     
+84:  LOADI (1)   
+85:  LOAD  (1)   5[LB]
+86:  LOADL       1
+87:  CALL        add     
+88:  LOAD  (1)   -1[LB]
+89:  CALL        add     
+90:  STOREI(1)   
+91:  LOAD  (1)   5[LB]
+92:  LOADL       1
+93:  CALL        sub     
+94:  STORE (1)   5[LB]
+95:  LOAD  (1)   5[LB]
+96:  LOADL       0
+97:  CALL        ge      
+98:  LOAD  (1)   5[LB]
+99:  LOAD  (1)   -1[LB]
+100:  CALL        add     
+101:  LOADI (1)   
+102:  LOAD  (1)   4[LB]
+103:  CALL        gt      
+104:  CALL        and     
+105:  JUMPIF(1)   81[CB]
+106:  LOAD  (1)   4[LB]
+107:  LOAD  (1)   5[LB]
+108:  LOADL       1
+109:  CALL        add     
+110:  LOAD  (1)   -1[LB]
+111:  CALL        add     
+112:  STOREI(1)   
+113:  LOAD  (1)   3[LB]
+114:  LOADL       1
+115:  CALL        add     
+116:  STORE (1)   3[LB]
+117:  LOAD  (1)   3[LB]
+118:  LOADL       10
+119:  CALL        lt      
+120:  JUMPIF(1)   71[CB]
+121:  POP   (0)   3
+122:  RETURN(0)   1
+123:  LOADA       0[SB]
+124:  CALL  (SB)  26[CB]
+125:  CALL        puteol  
+126:  CALL        puteol  
+127:  LOAD  (10)  0[SB]
+128:  CALL  (SB)  59[CB]
+129:  CALL        puteol  
+130:  CALL        puteol  
+131:  LOADA       0[SB]
+132:  CALL  (SB)  65[CB]
+133:  LOAD  (10)  0[SB]
+134:  CALL  (SB)  59[CB]
+135:  POP   (0)   10
+136:  HALT  

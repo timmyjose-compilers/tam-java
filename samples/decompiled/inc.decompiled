@@ -1,0 +1,17 @@
+0:  PUSH        1
+1:  JUMP        9[CB]
+2:  LOAD  (1)   -1[LB]
+3:  LOADI (1)   
+4:  LOADL       1
+5:  CALL        add     
+6:  LOAD  (1)   -1[LB]
+7:  STOREI(1)   
+8:  RETURN(0)   1
+9:  LOADA       0[SB]
+10:  CALL        getint  
+11:  LOADA       0[SB]
+12:  CALL  (SB)  2[CB]
+13:  LOAD  (1)   0[SB]
+14:  CALL        putint  
+15:  POP   (0)   1
+16:  HALT  

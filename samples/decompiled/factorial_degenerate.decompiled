@@ -1,0 +1,28 @@
+0:  PUSH        1
+1:  JUMP        15[CB]
+2:  LOAD  (1)   -1[LB]
+3:  LOADL       0
+4:  CALL        le      
+5:  JUMPIF(0)   8[CB]
+6:  LOADL       1
+7:  JUMP        14[CB]
+8:  LOAD  (1)   -1[LB]
+9:  LOAD  (1)   -1[LB]
+10:  LOADL       1
+11:  CALL        sub     
+12:  CALL  (SB)  2[CB]
+13:  CALL        mult    
+14:  RETURN(1)   1
+15:  JUMP        19[CB]
+16:  LOAD  (1)   -1[LB]
+17:  CALL        getint  
+18:  RETURN(0)   1
+19:  LOADA       0[SB]
+20:  CALL  (SB)  16[CB]
+21:  CALL        puteol  
+22:  CALL        puteol  
+23:  LOAD  (1)   0[SB]
+24:  CALL  (SB)  2[CB]
+25:  CALL        putint  
+26:  POP   (0)   1
+27:  HALT  

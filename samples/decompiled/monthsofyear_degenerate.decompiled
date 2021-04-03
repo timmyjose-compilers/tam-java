@@ -1,0 +1,91 @@
+0:  PUSH        3
+1:  PUSH        12
+2:  JUMP        23[CB]
+3:  PUSH        1
+4:  LOADL       0
+5:  STORE (1)   3[LB]
+6:  JUMP        17[CB]
+7:  LOAD  (1)   3[LB]
+8:  LOADA       -12[LB]
+9:  CALL        add     
+10:  LOADI (1)   
+11:  CALL        putint  
+12:  CALL        puteol  
+13:  LOAD  (1)   3[LB]
+14:  LOADL       1
+15:  CALL        add     
+16:  STORE (1)   3[LB]
+17:  LOAD  (1)   3[LB]
+18:  LOADL       12
+19:  CALL        lt      
+20:  JUMPIF(1)   7[CB]
+21:  POP   (0)   1
+22:  RETURN(0)   12
+23:  JUMP        35[CB]
+24:  LOAD  (1)   -1[LB]
+25:  CALL        getint  
+26:  LOAD  (1)   -1[LB]
+27:  LOADL       1
+28:  CALL        add     
+29:  CALL        getint  
+30:  LOAD  (1)   -1[LB]
+31:  LOADL       2
+32:  CALL        add     
+33:  CALL        getint  
+34:  RETURN(0)   1
+35:  JUMP        61[CB]
+36:  LOAD  (1)   -1[LB]
+37:  LOADL       100
+38:  CALL        mod     
+39:  LOADL       0
+40:  LOADL       1
+41:  CALL        eq      
+42:  LOAD  (1)   -1[LB]
+43:  LOADL       400
+44:  CALL        mod     
+45:  LOADL       0
+46:  LOADL       1
+47:  CALL        eq      
+48:  CALL        and     
+49:  LOAD  (1)   -1[LB]
+50:  LOADL       4
+51:  CALL        mod     
+52:  LOADL       0
+53:  LOADL       1
+54:  CALL        eq      
+55:  CALL        or      
+56:  JUMPIF(0)   59[CB]
+57:  LOADL       1
+58:  JUMP        60[CB]
+59:  LOADL       0
+60:  RETURN(1)   1
+61:  JUMP        80[CB]
+62:  LOADL       31
+63:  LOAD  (1)   -3[LB]
+64:  CALL  (SB)  36[CB]
+65:  JUMPIF(0)   68[CB]
+66:  LOADL       29
+67:  JUMP        69[CB]
+68:  LOADL       28
+69:  LOADL       31
+70:  LOADL       30
+71:  LOADL       31
+72:  LOADL       30
+73:  LOADL       31
+74:  LOADL       31
+75:  LOADL       30
+76:  LOADL       31
+77:  LOADL       30
+78:  LOADL       31
+79:  RETURN(12)  3
+80:  LOADA       0[SB]
+81:  CALL  (SB)  24[CB]
+82:  PUSH        12
+83:  LOAD  (3)   0[SB]
+84:  CALL  (SB)  62[CB]
+85:  STORE (12)  15[SB]
+86:  LOAD  (12)  15[SB]
+87:  CALL  (SB)  3[CB]
+88:  POP   (0)   12
+89:  POP   (0)   15
+90:  HALT  
