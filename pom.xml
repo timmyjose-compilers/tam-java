@@ -9,11 +9,17 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.8.0-M1</version>
+    <scope>test</scope>
+     </dependency>
+    <dependency>
+      <groupId>com.github.stefanbirkner</groupId>
+      <artifactId>system-lambda</artifactId>
+      <version>1.2.0</version>
       <scope>test</scope>
-    </dependency>
+    </dependency> 
   </dependencies>
   <properties>
     <project.source.Encoding>UTF-8</project.source.Encoding>

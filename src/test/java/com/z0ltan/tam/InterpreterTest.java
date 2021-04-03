@@ -1,21 +1,13 @@
 package com.z0ltan.tam;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
 
-public class InterpreterTest extends TestCase {
-  public InterpreterTest(String testName) {
-    super(testName);
-  }
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-  public static Test suite() {
-    return new TestSuite( InterpreterTest.class );
-  }
-
-  public void testInterpreter() {
+public class InterpreterTest {
+  public void testFoo() {
     assertTrue(true);
   }
 }
-
-

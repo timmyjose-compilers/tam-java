@@ -1,24 +1,33 @@
 package com.z0ltan.tam;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
 
-public class DisassemblerTest extends TestCase {
-  public DisassemblerTest(String testName) {
-    super(testName);
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOut;
+
+public class DisassemblerTest {
+  public void testFoo() throws Exception {
+    final String expected = tapSystemOut(() ->  {
+      System.out.println("Hi!");
+    });
+    assertEquals("Hi!\n", expected);
   }
 
-  public static Test suite() {
-    return new TestSuite( DisassemblerTest.class );
-  }
+  public void testCapitalise() throws Exception {
+    final String cmpFile = "samples/decompiled/capitalise.decompiled";
+    final String cmpString = Files.readString(Paths.get(cmpFile));
 
-  public void testDisassembler() {
-    assertTrue(true);
-  }
+    final Disassembler disassembler = new Disassembler();
+    final String decompiledString = tapSystemOut(() -> {
+      disassembler.main(null);
+    });
 
-  public void testCapitalise() {
-    final String cmpFile = "samples/expected/capitalise.tam";
+    //assertEquals(cmpString, decompiledString);
   }
 }
 
