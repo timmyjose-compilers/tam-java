@@ -63,7 +63,7 @@ Consider now the basic flow during a hypothetical operation of the program:
   2. Procedure P now calls procedure S. Register LB now points to the topmost frame, which belongs to S. Register L1 now points to the underlying frame, which belongs to P.
 
   3. Procedure S now calls procedure Q. Register LB now points to the topmost frame, which belongs to Q. Register L1 still points to P, since procedure P is the surrounding scope for
-     bothe S and Q.
+     both S and Q.
 
   4. Procedure Q now calls procedure R. Register LB now points to the topmost frame, which belongs to R. Register L1 now points to R's enclosing scope, which is Q. Register L2 now
      points to the old L1 value, which is P.
@@ -128,7 +128,7 @@ Register   Mnemonic     Name                         Behaviour
   14         L6        Local Base 6        L3 = content(content(content(content(content(content(LB))))))
   15         CP        Code Pointer        changed by all instructions
 
-Thus the TAM allows for at most 6 levels of nesting.
+Thus the TAM allows for at most 7 levels of nesting (at each level, so practically infinite levels of nesting from Triangle's perspective).
 
 ## Instructions
 
@@ -144,7 +144,7 @@ TAM instructions have a fixed 32-bit format:
 Every TAM routine follows this basic protocol:
 
 Suppose a procedure P requires d words of arguments and returns n words as result. Then, before the call to P, d words of arguments must be pushed onto the top of the stack. Just
-after returning from P, n words of result words must be pushed onto the top of the stack (the d words of arguments having already been popped off). Note that both d and n may be 9.
+after returning from P, n words of result words must be pushed onto the top of the stack (the d words of arguments having already been popped off). Note that both d and n may be 0.
 
 There are two kinds of routines in TAM:
 
@@ -208,9 +208,9 @@ Note that loads and stores are always wih respect to memory. Load from memory, a
 
     10     PUSH d            Push d words (uninitialised) onto the stack.
 
-    11     POP(n) d          Pop d n-word objects from the top of the stack.
+    11     POP(n) d          Pop and n-word result from the stack then pop d more words from the stack, and if n > 0, push the result back on the stack.
 
-    12     JUMP d[r]         Jump tot code address (d + register r).
+    12     JUMP d[r]         Jump to code address (d + register r).
 
     13     JUMPI             Pop a code address from the top of the stack, and then jump to that instruction.
 
