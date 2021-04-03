@@ -22,9 +22,8 @@ public class DisassemblerTest {
     final String cmpFile = "samples/decompiled/capitalise.decompiled";
     final String cmpString = Files.readString(Paths.get(cmpFile));
 
-    final Disassembler disassembler = new Disassembler();
     final String decompiledString = tapSystemOut(() -> {
-      disassembler.main(null);
+      Disassembler.main(null);
     });
 
     //assertEquals(cmpString, decompiledString);
