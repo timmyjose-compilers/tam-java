@@ -26,7 +26,7 @@ public class DisassemblerTest {
     }
   }
 
-  public void testCapitalise() throws Exception {
+  public void testCapitalise() {
     compareContents("samples/decompiled/capitalise.decompiled", "samples/binary/capitalise.tam");
   }
 

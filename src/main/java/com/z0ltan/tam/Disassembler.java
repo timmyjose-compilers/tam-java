@@ -37,88 +37,88 @@ public class Disassembler {
 
   private String primiiveRoutineFor(int offset) {
     switch (offset) {
-      case  Machine.idOffset:
+      case  Machine.Primitives.idOffset:
         return "id";
 
-      case  Machine.notOffset:
+      case  Machine.Primitives.notOffset:
         return "not";
 
-      case  Machine.andOffset:
+      case  Machine.Primitives.andOffset:
         return "and";
 
-      case  Machine.orOffset:
+      case  Machine.Primitives.orOffset:
         return "or";
 
-      case  Machine.succOffset:
+      case  Machine.Primitives.succOffset:
         return "succ";
 
-      case  Machine.predOffset:
+      case  Machine.Primitives.predOffset:
         return "pred";
 
-      case  Machine.negOffset:
+      case  Machine.Primitives.negOffset:
         return "neg";
 
-      case  Machine.addOffset:
+      case  Machine.Primitives.addOffset:
         return "add";
 
-      case  Machine.subOffset:
+      case  Machine.Primitives.subOffset:
         return "sub";
 
-      case  Machine.multOffset:
+      case  Machine.Primitives.multOffset:
         return "mult";
 
-      case  Machine.divOffset:
+      case  Machine.Primitives.divOffset:
         return "div";
 
-      case  Machine.modOffset:
+      case  Machine.Primitives.modOffset:
         return "mod";
 
-      case  Machine.ltOffset:
+      case  Machine.Primitives.ltOffset:
         return "lt";
 
-      case  Machine.leOffset:
+      case  Machine.Primitives.leOffset:
         return "le";
 
-      case  Machine.geOffset:
+      case  Machine.Primitives.geOffset:
         return "ge";
 
-      case  Machine.gtOffset:
+      case  Machine.Primitives.gtOffset:
         return "gt";
 
-      case  Machine.eqOffset:
+      case  Machine.Primitives.eqOffset:
         return "eq";
 
-      case  Machine.neOffset:
+      case  Machine.Primitives.neOffset:
         return "ne";
 
-      case  Machine.eolOffset:
+      case  Machine.Primitives.eolOffset:
         return "eol";
 
-      case  Machine.eofOffset:
+      case  Machine.Primitives.eofOffset:
         return "eof";
 
-      case  Machine.getOffset:
+      case  Machine.Primitives.getOffset:
         return "get";
 
-      case  Machine.putOffset:
+      case  Machine.Primitives.putOffset:
         return "put";
 
-      case  Machine.geteolOffset:
+      case  Machine.Primitives.geteolOffset:
         return "geteol";
 
-      case  Machine.puteolOffset:
+      case  Machine.Primitives.puteolOffset:
         return "puteol";
 
-      case  Machine.getintOffset:
+      case  Machine.Primitives.getintOffset:
         return "getint";
 
-      case  Machine.putintOffset:
+      case  Machine.Primitives.putintOffset:
         return "putint";
 
-      case  Machine.newOffset:
+      case  Machine.Primitives.newOffset:
         return "new";
 
-      case  Machine.disposeOffset:
+      case  Machine.Primitives.disposeOffset:
         return "dispose";
 
       default:
@@ -128,52 +128,52 @@ public class Disassembler {
 
   private String registerFor(int r) {
     switch (r) {
-      case Machine.CBr:
+      case Machine.Registers.CBr:
         return "CB";
 
-      case Machine.CTr:
+      case Machine.Registers.CTr:
         return "CT";
 
-      case Machine.PBr:
+      case Machine.Registers.PBr:
         return "PB";
 
-      case Machine.PTr:
+      case Machine.Registers.PTr:
         return "PT";
 
-      case Machine.SBr:
+      case Machine.Registers.SBr:
         return "SB";
 
-      case Machine.STr:
+      case Machine.Registers.STr:
         return "ST";
 
-      case Machine.HBr:
+      case Machine.Registers.HBr:
         return "HB";
 
-      case Machine.HTr:
+      case Machine.Registers.HTr:
         return "HT";
 
-      case Machine.LBr:
+      case Machine.Registers.LBr:
         return "LB";
 
-      case Machine.L1r:
+      case Machine.Registers.L1r:
         return "L1";
 
-      case Machine.L2r:
+      case Machine.Registers.L2r:
         return "L2";
 
-      case Machine.L3r:
+      case Machine.Registers.L3r:
         return "L3";
 
-      case Machine.L4r:
+      case Machine.Registers.L4r:
         return "L4";
 
-      case Machine.L5r:
+      case Machine.Registers.L5r:
         return "L5";
 
-      case Machine.L6r:
+      case Machine.Registers.L6r:
         return "L6";
 
-      case Machine.L7r:
+      case Machine.Registers.L7r:
         return "L7";
 
       default:
@@ -185,7 +185,7 @@ public class Disassembler {
     StringBuffer sb = new StringBuffer();
 
     switch (instr.op) {
-      case Machine.LOADOp:
+      case Machine.Opcodes.LOADOp:
         sb.append("LOAD(")
           .append(instr.n)
           .append(") ")
@@ -195,7 +195,7 @@ public class Disassembler {
           .append("]");
         break;
 
-      case Machine.LOADAOp:
+      case Machine.Opcodes.LOADAOp:
         sb.append("LOADA ")
           .append(instr.d)
           .append("[")
@@ -203,15 +203,15 @@ public class Disassembler {
           .append("]");
         break;
 
-      case Machine.LOADIOp:
+      case Machine.Opcodes.LOADIOp:
         sb.append("LOADI(").append(instr.n).append(")");
         break;
 
-      case Machine.LOADLOp:
+      case Machine.Opcodes.LOADLOp:
         sb.append("LOADL ").append(instr.d);
         break;
 
-      case Machine.STOREOp:
+      case Machine.Opcodes.STOREOp:
         sb.append("STORE(")
           .append(instr.n)
           .append(") ")
@@ -221,14 +221,14 @@ public class Disassembler {
           .append("]");
         break;
 
-      case Machine.STOREIOp:
+      case Machine.Opcodes.STOREIOp:
         sb.append("STOREI(")
           .append(instr.n)
           .append(")");
         break;
 
-      case Machine.CALLOp:
-        if (instr.r == Machine.PBr) {
+      case Machine.Opcodes.CALLOp:
+        if (instr.r == Machine.Registers.PBr) {
           sb.append("CALL ").append(primiiveRoutineFor(instr.d));
         } else {
           sb.append("CALL(")
@@ -241,29 +241,29 @@ public class Disassembler {
         }
         break;
 
-      case Machine.CALLIOp:
+      case Machine.Opcodes.CALLIOp:
         sb.append("CALLI");
         break;
 
-      case Machine.RETURNOp:
+      case Machine.Opcodes.RETURNOp:
         sb.append("RETURN(")
           .append(instr.n)
           .append(") ")
           .append(instr.d);
         break;
 
-      case Machine.PUSHOp:
+      case Machine.Opcodes.PUSHOp:
         sb.append("PUSH ").append(instr.d);
         break;
 
-      case Machine.POPOp:
+      case Machine.Opcodes.POPOp:
         sb.append("POP(")
           .append(instr.n)
           .append(") ")
           .append(instr.d);
         break;
 
-      case Machine.JUMOOp:
+      case Machine.Opcodes.JUMOOp:
         sb.append("JUMP ")
           .append(instr.d)
           .append("[")
@@ -271,11 +271,11 @@ public class Disassembler {
           .append("]");
         break;
 
-      case Machine.JUMPIOp:
+      case Machine.Opcodes.JUMPIOp:
         sb.append("JUMPI");
         break;
 
-      case Machine.JUMPIFOp:
+      case Machine.Opcodes.JUMPIFOp:
         sb.append("JUMPIF(")
           .append(instr.n)
           .append(") ")
@@ -285,7 +285,7 @@ public class Disassembler {
           .append("]");
         break;
 
-      case Machine.HALTOp:
+      case Machine.Opcodes.HALTOp:
         sb.append("HALT");
         break;
     }
