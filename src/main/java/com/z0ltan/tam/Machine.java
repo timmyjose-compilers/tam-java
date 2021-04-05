@@ -1,11 +1,11 @@
 package com.z0ltan.tam;
 
 public class Machine {
-  private static final CODESIZE = 1024;
-  private static final DATASIZE = 1024;
+  private static final int CODESIZE = 1024;
+  private static final int DATASIZE = 1024;
 
   // code store
-  public static int code[] = new code[CODESIZE];
+  public static Instruction code[] = new Instruction[CODESIZE];
   public static int CB = 0;
   public static int CT = 0;
   public static int PB = CODESIZE;
@@ -39,13 +39,14 @@ public class Machine {
   public static final int HALTOp = 15;
 
   // registers
+  
   public static final int CBr = 0;
   public static final int CTr = 1;
   public static final int PBr = 2;
   public static final int PTr = 3;
   public static final int SBr = 4;
   public static final int STr = 5;
-  public static final int HBr = 5;
+  public static final int HBr = 6;
   public static final int HTr = 7;
   public static final int LBr = 8;
   public static final int L1r = 9;
@@ -54,7 +55,7 @@ public class Machine {
   public static final int L4r = 12;
   public static final int L5r = 13;
   public static final int L6r = 14;
-  public static final int L7r = 14;
+  public static final int L7r = 15;
 
   // primitive routine offsets
   
@@ -87,7 +88,8 @@ public class Machine {
   public static final int newOffset = 27;
   public static final int disposeOffset = 28;
   
-  // max int range
+  // supported int range
+ 
   public static final int minIntRep = -32767;
   public static final int maxIntRep = 32768;
 

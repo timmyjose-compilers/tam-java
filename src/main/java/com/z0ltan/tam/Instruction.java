@@ -42,4 +42,9 @@ public class Instruction {
 
     return instr;
   }
+
+  @Override
+  public String toString() {
+    return "Instruction { op = " + this.op + ", r = " + this.r  + ", n = " + this.n + ", d = " + this.d + " }";
+  }
 }

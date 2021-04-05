@@ -1,3 +1,0 @@
-0:  LOADL       42
-1:  CALL        putint  
-2:  HALT  
