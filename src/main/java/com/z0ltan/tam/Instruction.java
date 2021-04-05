@@ -45,6 +45,9 @@ public class Instruction {
 
   @Override
   public String toString() {
-    return "Instruction { op = " + this.op + ", r = " + this.r  + ", n = " + this.n + ", d = " + this.d + " }";
+    return "Instruction { op = " + Machine.Opcodes.opcodeName(this.op) 
+      + ", r = " + Machine.Registers.registerName(this.r) 
+      + ", n = " + this.n 
+      + ", d = " + this.d + " }";
   }
 }

@@ -35,152 +35,6 @@ public class Disassembler {
     } 
   }
 
-  private String primiiveRoutineFor(int offset) {
-    switch (offset) {
-      case  Machine.Primitives.idOffset:
-        return "id";
-
-      case  Machine.Primitives.notOffset:
-        return "not";
-
-      case  Machine.Primitives.andOffset:
-        return "and";
-
-      case  Machine.Primitives.orOffset:
-        return "or";
-
-      case  Machine.Primitives.succOffset:
-        return "succ";
-
-      case  Machine.Primitives.predOffset:
-        return "pred";
-
-      case  Machine.Primitives.negOffset:
-        return "neg";
-
-      case  Machine.Primitives.addOffset:
-        return "add";
-
-      case  Machine.Primitives.subOffset:
-        return "sub";
-
-      case  Machine.Primitives.multOffset:
-        return "mult";
-
-      case  Machine.Primitives.divOffset:
-        return "div";
-
-      case  Machine.Primitives.modOffset:
-        return "mod";
-
-      case  Machine.Primitives.ltOffset:
-        return "lt";
-
-      case  Machine.Primitives.leOffset:
-        return "le";
-
-      case  Machine.Primitives.geOffset:
-        return "ge";
-
-      case  Machine.Primitives.gtOffset:
-        return "gt";
-
-      case  Machine.Primitives.eqOffset:
-        return "eq";
-
-      case  Machine.Primitives.neOffset:
-        return "ne";
-
-      case  Machine.Primitives.eolOffset:
-        return "eol";
-
-      case  Machine.Primitives.eofOffset:
-        return "eof";
-
-      case  Machine.Primitives.getOffset:
-        return "get";
-
-      case  Machine.Primitives.putOffset:
-        return "put";
-
-      case  Machine.Primitives.geteolOffset:
-        return "geteol";
-
-      case  Machine.Primitives.puteolOffset:
-        return "puteol";
-
-      case  Machine.Primitives.getintOffset:
-        return "getint";
-
-      case  Machine.Primitives.putintOffset:
-        return "putint";
-
-      case  Machine.Primitives.newOffset:
-        return "new";
-
-      case  Machine.Primitives.disposeOffset:
-        return "dispose";
-
-      default:
-        throw new IllegalStateException("invalid offset for primitive routines: " + offset);
-    }
-  }
-
-  private String registerFor(int r) {
-    switch (r) {
-      case Machine.Registers.CBr:
-        return "CB";
-
-      case Machine.Registers.CTr:
-        return "CT";
-
-      case Machine.Registers.PBr:
-        return "PB";
-
-      case Machine.Registers.PTr:
-        return "PT";
-
-      case Machine.Registers.SBr:
-        return "SB";
-
-      case Machine.Registers.STr:
-        return "ST";
-
-      case Machine.Registers.HBr:
-        return "HB";
-
-      case Machine.Registers.HTr:
-        return "HT";
-
-      case Machine.Registers.LBr:
-        return "LB";
-
-      case Machine.Registers.L1r:
-        return "L1";
-
-      case Machine.Registers.L2r:
-        return "L2";
-
-      case Machine.Registers.L3r:
-        return "L3";
-
-      case Machine.Registers.L4r:
-        return "L4";
-
-      case Machine.Registers.L5r:
-        return "L5";
-
-      case Machine.Registers.L6r:
-        return "L6";
-
-      case Machine.Registers.L7r:
-        return "L7";
-
-      default:
-        throw new IllegalStateException("invalid register: " + r);
-    }
-  }
-
   private String toText(final Instruction instr) {
     StringBuffer sb = new StringBuffer();
 
@@ -191,7 +45,7 @@ public class Disassembler {
           .append(") ")
           .append(instr.d)
           .append("[")
-          .append(registerFor(instr.r))
+          .append(Machine.Registers.registerName(instr.r))
           .append("]");
         break;
 
@@ -199,7 +53,7 @@ public class Disassembler {
         sb.append("LOADA ")
           .append(instr.d)
           .append("[")
-          .append(registerFor(instr.r))
+          .append(Machine.Registers.registerName(instr.r))
           .append("]");
         break;
 
@@ -217,7 +71,7 @@ public class Disassembler {
           .append(") ")
           .append(instr.d)
           .append("[")
-          .append(registerFor(instr.r))
+          .append(Machine.Registers.registerName(instr.r))
           .append("]");
         break;
 
@@ -229,14 +83,14 @@ public class Disassembler {
 
       case Machine.Opcodes.CALLOp:
         if (instr.r == Machine.Registers.PBr) {
-          sb.append("CALL ").append(primiiveRoutineFor(instr.d));
+          sb.append("CALL ").append(Machine.Primitives.primitiveName(instr.d));
         } else {
           sb.append("CALL(")
-            .append(registerFor(instr.n))
+            .append(Machine.Registers.registerName(instr.n))
             .append(") ")
             .append(instr.d)
             .append("[")
-            .append(registerFor(instr.r))
+            .append(Machine.Registers.registerName(instr.r))
             .append("]");
         }
         break;
@@ -263,11 +117,11 @@ public class Disassembler {
           .append(instr.d);
         break;
 
-      case Machine.Opcodes.JUMOOp:
+      case Machine.Opcodes.JUMPOp:
         sb.append("JUMP ")
           .append(instr.d)
           .append("[")
-          .append(registerFor(instr.r))
+          .append(Machine.Registers.registerName(instr.r))
           .append("]");
         break;
 
@@ -281,7 +135,7 @@ public class Disassembler {
           .append(") ")
           .append(instr.d)
           .append("[")
-          .append(registerFor(instr.r))
+          .append(Machine.Registers.registerName(instr.r))
           .append("]");
         break;
 

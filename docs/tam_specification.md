@@ -208,7 +208,7 @@ Note that loads and stores are always wih respect to memory. Load from memory, a
 
     10     PUSH d            Push d words (uninitialised) onto the stack.
 
-    11     POP(n) d          Pop and n-word result from the stack then pop d more words from the stack, and if n > 0, push the result back on the stack.
+    11     POP(n) d          Pop an n-word result from the stack then pop d more words from the stack, and if n > 0, push the result back on the stack.
 
     12     JUMP d[r]         Jump to code address (d + register r).
 
