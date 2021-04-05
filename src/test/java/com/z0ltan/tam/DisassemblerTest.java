@@ -8,28 +8,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOut;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static com.z0ltan.tam.matchers.ContentMatcher.contentIsSame;
 
 public class DisassemblerTest {
-  private String compress(final String str) {
-    final StringBuffer sb = new StringBuffer();
-
-    for (char c : str.toCharArray()) {
-      if (Character.isWhitespace(c)) {
-        continue;
-      }
-      sb.append(c);
-    }
-
-    return sb.toString();
-  }
-
-  private void assertContentEquals(final String expected, final String actual) {
-    final String expectedCompressed = compress(expected);
-    final String actualCompressed = compress(actual);
-
-    assertEquals(expectedCompressed, actualCompressed);
-  }
-
   private void compareContents(final String decompiledFile, final String tamFile) {
     try {
       final String cmpString = Files.readString(Paths.get(decompiledFile));
@@ -38,7 +20,7 @@ public class DisassemblerTest {
         Disassembler.main(new String[] { tamFile });
       });
 
-      assertContentEquals(cmpString, decompiledString);
+      assertThat(decompiledString, contentIsSame(cmpString));
     } catch (Exception ex) {
       throw new RuntimeException(ex);
     }

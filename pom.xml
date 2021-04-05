@@ -20,6 +20,12 @@
       <version>1.2.0</version>
       <scope>test</scope>
     </dependency> 
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <properties>
     <project.source.Encoding>UTF-8</project.source.Encoding>
