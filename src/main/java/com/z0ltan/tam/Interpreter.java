@@ -126,11 +126,27 @@ public class Interpreter {
   }
 
   private int readInt() {
-    try (final Scanner in = new Scanner(System.in)) {
-      return in.nextInt();
+    try {
+      int sign = 1;
+      int value = 0;
+
+      int first = System.in.read();
+      if ((char)first == '-') {
+        sign = -1;
+      } else {
+        value = first - 48;
+      }
+
+      int d = -1;
+      while ((d = System.in.read()) != '\n') {
+        value = value * 10 + (d - 48);
+      }
+
+      int res = sign * value;
+      return sign * value;
     } catch (Exception ex) {
       Machine.status = Machine.VMStatuses.failedIOError;
-      return -1;
+      return 0;
     }
   }
 

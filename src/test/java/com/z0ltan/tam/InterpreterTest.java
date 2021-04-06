@@ -64,8 +64,11 @@ public class InterpreterTest {
     compareContents("samples/decompiled/reverse_line.decompiled", "samples/binary/reverse_line.tam");
   }
 
-  public void xtestDates() {
-    compareContents("samples/decompiled/dates.decompiled", "samples/binary/dates.tam");
+  public void testDates() throws Exception {
+    withTextFromSystemIn("04\n04\n11\n22\n01\n28\n12\n31\n")
+      .execute(() -> {
+        compareContents("samples/binary/dates.tam", "samples/output/dates.out");
+      });
   }
 
   public void testInc() throws Exception {
