@@ -42,8 +42,11 @@ public class InterpreterTest {
     compareContents("samples/decompiled/record.decompiled", "samples/binary/record.tam");
   }
 
-  public void xtestDate() {
-    compareContents("samples/decompiled/date.decompiled", "samples/binary/date.tam");
+  public void testDate() throws Exception {
+    withTextFromSystemIn("2021\n04\n06\n")
+      .execute(() -> {
+        compareContents("samples/binary/date.tam", "samples/output/date.out");
+      });
   }
 
   public void xtestHello() {
