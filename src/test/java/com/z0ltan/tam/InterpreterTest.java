@@ -34,8 +34,11 @@ public class InterpreterTest {
     compareContents("samples/decompiled/freq.decompiled", "samples/binary/freq.tam");
   }
 
-  public void xtestMonthsOfYear() {
-    compareContents("samples/decompiled/monthsofyear.decompiled", "samples/binary/monthsofyear.tam");
+  public void testMonthsOfYear() throws Exception {
+    withTextFromSystemIn("2021\n04\n06\n")
+      .execute(() -> {
+        compareContents("samples/binary/monthsofyear.tam", "samples/output/monthsofyear.out");
+      });
   }
 
   public void xtestRecord() {
