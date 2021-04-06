@@ -2,7 +2,7 @@ package com.z0ltan.tam;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.util.Scanner;
+import java.util.Arrays;
 
 import java.io.IOException;
 
@@ -308,21 +308,21 @@ public class Interpreter {
 
       case Machine.Primitives.eqOffset:
         {
-          Machine.ST -= 3;
-          final int lhsStartAddr = Machine.data[Machine.ST];
-          final int rhsStartAddr = Machine.data[Machine.ST + 1];
-          final int n = Machine.data[Machine.ST + 2];
-          Machine.data[Machine.ST++] = toInt(checkEqual(lhsStartAddr, rhsStartAddr, n));
+          final int n = Machine.data[Machine.ST - 1];
+          Machine.ST -= 2 * n;
+          final int lhsAddr = Machine.ST - 1;
+          final int rhsAddr = Machine.ST - 1 + n;
+          Machine.data[Machine.ST - 1] = toInt(checkEqual(lhsAddr, rhsAddr, n));
         }
         break;
 
       case Machine.Primitives.neOffset:
         {
-          Machine.ST -= 3;
-          final int lhsStartAddr = Machine.data[Machine.ST];
-          final int rhsStartAddr = Machine.data[Machine.ST + 1];
-          final int n = Machine.data[Machine.ST + 2];
-          Machine.data[Machine.ST++] = toInt(!checkEqual(lhsStartAddr, rhsStartAddr, n));
+          final int n = Machine.data[Machine.ST - 1];
+          Machine.ST -= 2 * n;
+          final int lhsAddr = Machine.ST - 1;
+          final int rhsAddr = Machine.ST - 1 + n;
+          Machine.data[Machine.ST - 1] = toInt(!checkEqual(lhsAddr, rhsAddr, n));
         }
         break;
 
@@ -512,12 +512,19 @@ public class Interpreter {
 
         case Machine.Opcodes.CALLIOp:
           {
-            checkSpace(Machine.linkDataSize);
             Machine.ST -= Machine.closureSize;
             final int address = Machine.data[Machine.ST + 1];
-            Machine.data[Machine.ST + 1] = Machine.LB;
-            Machine.data[Machine.ST + 1] = Machine.CP + 1;
-            Machine.CP = address;
+            if ((address >= Machine.PB) && (address <= Machine.PT)) {
+              callPrimitive(address - Machine.PB);
+              Machine.CP++;
+            } else {
+              checkSpace(Machine.linkDataSize);
+              Machine.data[Machine.ST + 1] = Machine.LB;
+              Machine.data[Machine.ST + 2] = Machine.CP + 1;
+              Machine.LB = Machine.ST;
+              Machine.ST += Machine.linkDataSize;
+              Machine.CP = address;
+            }
           }
           break;
 

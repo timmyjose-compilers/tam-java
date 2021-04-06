@@ -30,8 +30,11 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestFreq() {
-    compareContents("samples/decompiled/freq.decompiled", "samples/binary/freq.tam");
+  public void testFreq() throws Exception {
+    withTextFromSystemIn("hello world\n")
+      .execute(() -> {
+        compareContents("samples/binary/freq.tam", "samples/output/freq.out");
+      });
   }
 
   public void testMonthsOfYear() throws Exception {
@@ -41,8 +44,8 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestRecord() {
-    compareContents("samples/decompiled/record.decompiled", "samples/binary/record.tam");
+  public void testRecord() {
+    compareContents("samples/binary/record.tam", "samples/output/record.out");
   }
 
   public void testDate() throws Exception {
@@ -52,16 +55,15 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestHello() {
-    compareContents("samples/decompiled/hello.decompiled", "samples/binary/hello.tam");
+  public void testHello() {
+    compareContents("samples/binary/hello.tam", "samples/output/hello.out");
   }
 
-  public void xtestNestedArrays() {
-    compareContents("samples/decompiled/nestedarrays.decompiled", "samples/binary/nestedarrays.tam");
-  }
-
-  public void xtestReverseLine() {
-    compareContents("samples/decompiled/reverse_line.decompiled", "samples/binary/reverse_line.tam");
+  public void testNestedArrays() throws Exception {
+    withTextFromSystemIn("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n")
+      .execute(() -> {
+        compareContents("samples/binary/nestedarrays.tam", "samples/output/nestedarrays.out");
+      });
   }
 
   public void testDates() throws Exception {
@@ -78,28 +80,43 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestNestedRecords() {
-    compareContents("samples/decompiled/nestedrecords.decompiled", "samples/binary/nestedrecords.tam");
+  public void testNestedRecords() {
+    compareContents("samples/binary/nestedrecords.tam", "samples/output/nestedrecords.out");
   }
 
-  public void xtestString() {
-    compareContents("samples/decompiled/string.decompiled", "samples/binary/string.tam");
+  public void testString() throws Exception {
+    withTextFromSystemIn("Hello, world!\n")
+      .execute(() -> {
+        compareContents("samples/binary/string.tam", "samples/output/string.out");
+      });
   }
 
-  public void xtestEcho() {
-    compareContents("samples/decompiled/echo.decompiled", "samples/binary/echo.tam");
+  public void testEcho() throws Exception {
+    withTextFromSystemIn("Hello, world! Nice to meet you!\n")
+      .execute(() -> {
+        compareContents("samples/binary/echo.tam", "samples/output/echo.out");
+      });
   }
 
-  public void xtestInsertionSort() {
-    compareContents("samples/decompiled/insertion_sort.decompiled", "samples/binary/insertion_sort.tam");
+  public void testInsertionSort() throws Exception {
+    withTextFromSystemIn("1\n2\n3\n5\n4\n34\n2\n1\n2\n3\n")
+      .execute(() -> {
+        compareContents("samples/binary/insertion_sort.tam", "samples/output/insertion_sort.out");
+      });
   }
 
-  public void xtestOdd() {
-    compareContents("samples/decompiled/odd.decompiled", "samples/binary/odd.tam");
+  public void testOdd() throws Exception {
+    withTextFromSystemIn("99\n")
+      .execute(() -> {
+        compareContents("samples/binary/odd.tam", "samples/output/odd.out");
+      });
   }
 
-  public void xtestSumProc() {
-    compareContents("samples/decompiled/sum_proc.decompiled", "samples/binary/sum_proc.tam");
+  public void testSumProc() throws Exception {
+    withTextFromSystemIn("11\n14\n")
+      .execute(() -> {
+        compareContents("samples/binary/sum_proc.tam", "samples/output/sum_proc.out");
+      });
   }
 
   public void testEmptycommandeot() throws Exception {
@@ -109,12 +126,18 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestIteratively() {
-    compareContents("samples/decompiled/iteratively.decompiled", "samples/binary/iteratively.tam");
+  public void testIteratively() throws Exception {
+    withTextFromSystemIn("1\n2\n11\n22\n9\n0\n78\n23\n45\n233\n")
+      .execute(() -> {
+        compareContents("samples/binary/iteratively.tam", "samples/output/iteratively.out");
+      });
   }
 
-  public void xtestPower() {
-    compareContents("samples/decompiled/power.decompiled", "samples/binary/power.tam");
+  public void testPower() throws Exception {
+    withTextFromSystemIn("11\n3\n")
+      .execute(() -> {
+        compareContents("samples/binary/power.tam", "samples/output/power.out");
+      });
   }
 
   public void testEmptyCommandSemicolon() throws Exception {
@@ -124,16 +147,22 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestLeapYear() {
-    compareContents("samples/decompiled/leapyear.decompiled", "samples/binary/leapyear.tam");
+  public void testLeapYear() throws Exception {
+    withTextFromSystemIn("2020\n11\n01\n")
+      .execute(() -> {
+        compareContents("samples/binary/leapyear.tam", "samples/output/leapyear.out");
+      });
   }
 
-  public void xtestPrintArray() {
-    compareContents("samples/decompiled/print_array.decompiled", "samples/binary/print_array.tam");
+  public void testPrintArray() {
+    compareContents("samples/binary/print_array.tam", "samples/output/print_array.out");
   }
 
-  public void xtestFactorial() {
-    compareContents("samples/decompiled/factorial.decompiled", "samples/binary/factorial.tam");
+  public void testFactorial() throws Exception {
+    withTextFromSystemIn("5\n")
+      .execute(() -> {
+        compareContents("samples/binary/factorial.tam", "samples/output/factorial.out");
+      });
   }
 
   public void testLine() throws Exception {
@@ -143,7 +172,10 @@ public class InterpreterTest {
       });
   }
 
-  public void xtestRationals() {
-    compareContents("samples/decompiled/rationals.decompiled", "samples/binary/rationals.tam");
+  public void testRationals() throws Exception { 
+    withTextFromSystemIn("2\n3\n3\n4\n")
+      .execute(() -> {
+        compareContents("samples/binary/rationals.tam", "samples/output/rationals.out");
+      });
   }
 }
