@@ -23,8 +23,11 @@ public class InterpreterTest {
     }
   }
 
-  public void xxtestCapitalise() throws Exception {
-    compareContents("samples/decompiled/freq.decompiled", "samples/binary/freq.tam");
+  public void testCapitalise() throws Exception {
+    withTextFromSystemIn("Hello")
+      .execute(() -> {
+        compareContents("samples/binary/capitalise.tam", "samples/output/capitalise.out");
+      });
   }
 
   public void xtestFreq() {
@@ -124,8 +127,11 @@ public class InterpreterTest {
     compareContents("samples/decompiled/factorial.decompiled", "samples/binary/factorial.tam");
   }
 
-  public void xtestLine() {
-    compareContents("samples/decompiled/line.decompiled", "samples/binary/line.tam");
+  public void testLine() throws Exception {
+    withTextFromSystemIn("hello\n")
+      .execute(() -> {
+        compareContents("samples/binary/line.tam", "samples/output/line.out");
+      });
   }
 
   public void xtestRationals() {

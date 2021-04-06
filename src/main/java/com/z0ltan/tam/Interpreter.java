@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class Interpreter {
   private String objName;
+  private int currentChar = -1;
 
   public Interpreter() {}
 
@@ -306,14 +307,12 @@ public class Interpreter {
           final int rhsStartAddr = Machine.data[Machine.ST + 1];
           final int n = Machine.data[Machine.ST + 2];
           Machine.data[Machine.ST++] = toInt(!checkEqual(lhsStartAddr, rhsStartAddr, n));
-
         }
         break;
 
       case Machine.Primitives.eolOffset:
         {
-          final char c = readChar();
-          Machine.data[Machine.ST++] = (c == '\n') ? Machine.trueRep : Machine.falseRep;
+          Machine.data[Machine.ST++] = (currentChar == '\n') ? Machine.trueRep : Machine.falseRep;
         }
         break;
 
@@ -328,8 +327,8 @@ public class Interpreter {
         {
           Machine.ST--;
           final int address = Machine.data[Machine.ST];
-          char c = readChar();
-          Machine.data[address] = c;
+          currentChar = readChar();
+          Machine.data[address] = currentChar;
         }
         break;
 
@@ -343,7 +342,7 @@ public class Interpreter {
 
       case Machine.Primitives.geteolOffset:
         {
-          char c = (char)0;
+          char c = '\u0000';
           while (c != '\n') {
             c = readChar();
           }
@@ -410,6 +409,7 @@ public class Interpreter {
       int n = instr.n;
       int d = instr.d;
 
+      //System.out.println("executing " + instr + ", CP = " + Machine.CP);
       switch (op) {
         case Machine.Opcodes.LOADOp:
           {
@@ -557,8 +557,7 @@ public class Interpreter {
           {
             Machine.ST--;
             final int value = Machine.data[Machine.ST];
-            Machine.ST--;
-            final int address = Machine.data[Machine.ST];
+            final int address = d + content(r);
 
             if (value == n) {
               Machine.CP = address;
