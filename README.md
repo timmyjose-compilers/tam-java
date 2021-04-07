@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/timmyjose-compilers/tam-java.svg)](https://jitpack.io/#timmyjose-compilers/tam-java)
+
 # tam-java
 
 An implementation of the Triangle Abstract Machine (TAM) in Java.
